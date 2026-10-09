@@ -1,0 +1,35 @@
+services:
+  # Monolithic Web Service on Render (Free Tier Friendly)
+  # Runs Node.js Backend API + Socket.IO Server + Serves Built React SPA
+  - type: web
+    name: pro-football-live-studio
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: DB_ADAPTER
+        value: file
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
+        sync: false
+      - key: GOOGLE_PRIVATE_KEY
+        sync: false
+      - key: FACEBOOK_RTMPS_URL
+        value: rtmps://live-api-s.facebook.com:443/rtmp/
+      - key: FACEBOOK_STREAM_KEY
+        sync: false
+      - key: ADMIN_EMAIL
+        value: admin@profootball.live
+      - key: ADMIN_PASSWORD
+        sync: false
